@@ -3,15 +3,8 @@
     <gp-header />
 
     <ul class="images">
-      <li class="image" v-for="photo of filterPhotos">
-        <img :src="photo.preview" :alt="photo.title">
-
-        <div class="footer">
-          <p :title="photo.title">{{ photo.title }}</p>
-          <button>
-            <img src="./assets/images/download.svg" alt="Download photo">
-          </button>
-        </div>
+      <li class="image" v-for="photo of filterPhotos" :key="photo.id">
+        <gp-card :photo="photo" />
       </li>
     </ul>
   </div>
@@ -19,10 +12,13 @@
 
 <script>
 import Header from './components/Header.vue';
+import Card from './components/Card.vue';
+
 export default {
 
   components: {
-    "gp-header": Header
+    'gp-header': Header,
+    'gp-card': Card
   },
 
   data() {
@@ -82,42 +78,5 @@ body {
   flex-wrap: wrap;
 
   margin-top: 96px;
-
-  .image {
-    flex: 0 0 calc(220px - 16px);
-    height: 220px;
-    background-color: #232441;
-
-    &:not(:last-child) {
-      margin-right: 16px;
-    }
-
-    img {
-      max-width: 100%;
-      min-width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    .footer {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-
-      p {
-        text-overflow: ellipsis;
-        overflow: hidden;
-        width: 16ch;
-        white-space: nowrap;
-      }
-
-      button {
-        background-color: transparent;
-        border: none;
-        outline: none;
-        cursor: pointer;
-      }
-    }
-  }
 }
 </style>
