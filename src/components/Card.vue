@@ -4,7 +4,7 @@
 
 		<p :title="photo.title">{{ photo.title }}</p>
 
-		<button>
+		<button @click="download(photo.preview, photo.title)">
 			<img class="ic-download" src="../assets/images/download.svg" alt="Download photo" />
 		</button>
 	</article>
@@ -12,7 +12,23 @@
 
 <script>
 export default {
-	props: ['photo']
+	props: ['photo'],
+	methods: {
+		download(url, name) {
+			fetch(url)
+        .then(resp => resp.blob())
+        .then(blob => {
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.style.display = 'none';
+            a.href = url;
+            a.download = name;
+            document.body.appendChild(a);
+            a.click();
+            window.URL.revokeObjectURL(url);
+        })
+		}
+	}
 }
 </script>
 
