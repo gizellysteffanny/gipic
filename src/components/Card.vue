@@ -37,8 +37,9 @@ export default {
 		flex: 0 0 calc(220px - 16px);
 		width: 220px;
 		height: 320px;
+		border-radius: 3px;
 		background-color: #232441;
-		margin-right: 16px;
+		margin: 0 0 16px 16px;
 		overflow: hidden;
 		position: relative;
 
